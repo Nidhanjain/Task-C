@@ -21,12 +21,12 @@ SELECT * FROM Projects ORDER BY Start_Date;
 
 WITH OrderedTasks AS (
     SELECT *, 
-           ROW_NUMBER() OVER (ORDER BY Start_Date) AS rn
+    ROW_NUMBER() OVER (ORDER BY Start_Date) AS rn
     FROM Projects
 ),
 GroupKey AS (
     SELECT *, 
-           DATEADD(DAY, -rn, Start_Date) AS group_key
+     DATEADD(DAY, -rn, Start_Date) AS group_key
     FROM OrderedTasks
 ),
 ProjectGroups AS (
@@ -71,16 +71,12 @@ CREATE TABLE Packages (
     Salary FLOAT        
 );
 INSERT INTO Packages (ID, Salary) VALUES
-(1, 15.20),
-(2, 10.06),
-(3, 11.55),
-(4, 12.12);
-
+(1, 15.20), (2, 10.06),(3, 11.55),(4, 12.12);
 SELECT S.Name
 FROM Students S
 JOIN Friends F ON S.ID = F.ID
-JOIN Packages P1 ON S.ID = P1.ID         -- Student's salary
-JOIN Packages P2 ON F.Friend_ID = P2.ID  -- Friend's salary
+JOIN Packages P1 ON S.ID = P1.ID         
+JOIN Packages P2 ON F.Friend_ID = P2.ID  
 WHERE P2.Salary > P1.Salary
 ORDER BY P2.Salary;
 
@@ -153,9 +149,7 @@ INSERT INTO View_Stats VALUES
 (75516, 75, 11);
 
 CREATE TABLE Submission_Stats (
-    challenge_id INT,
-    total_submissions INT,
-    total_accepted_submissions INT
+challenge_id INT,total_submissions INT,total_accepted_submissions INT
 );
 INSERT INTO Submission_Stats VALUES
 (75516, 34, 12),
